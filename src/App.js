@@ -1,12 +1,10 @@
 import './App.css';
-import TaskCard from './components/taskCard/taskCard'
+import MainArea from './components/mainArea/mainArea'
 
 function App() {
 	return (
 		<div className="wholePage">
-			<TaskCard></TaskCard>
-			<TaskCard></TaskCard>
-			<TaskCard></TaskCard>
+			<MainArea></MainArea>
 		</div>
 	);
 }

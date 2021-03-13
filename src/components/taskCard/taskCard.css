@@ -2,18 +2,33 @@
     height: 300px;
     width: 300px;
     background-color: rgb(202, 202, 202);
-    box-shadow: 5px 5px 20px rgb(34, 34, 34);
     color: rgb(70, 70, 70);
     margin: 1em 1em 1em 1em;
+    box-shadow: 5px 5px 20px rgb(34, 34, 34);
     position: relative;
 }
 
 
 .title {
     width: 100%;
-    background-color: rgb(202, 202, 202);
+    background-color: rgb(158, 158, 158);
     border: 0px;
-    border-bottom: 2px solid rgb(156, 156, 156);
+    border-bottom: 2px solid rgb(158, 158, 158);
+    outline: none;
     font-size: 2em;
-    
+    position: absolute;
+    top: 0px;
+}
+
+
+.removeCard {
+    font-size: 24px;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+
+.removeCard:hover {
+    cursor: pointer;
 }
