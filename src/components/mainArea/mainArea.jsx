@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TaskCard from './../taskCard/taskCard'
+import './mainArea.css'
 
 class MainArea extends Component {
     state = { 
@@ -15,9 +16,11 @@ class MainArea extends Component {
     
     render() { 
         return (
-            this.state.ids.map(id =>
-                <TaskCard key={id} id={id} onDelete={this.handleDelete}/>
-            )
+            <div className="mainArea">
+                {this.state.ids.map(id =>
+                <TaskCard key={id} id={id} onDelete={this.handleDelete}/>)}
+            </div>
+            
          );
     }
 

@@ -1,0 +1,21 @@
+:root {
+    --primaryColor: rgb(202, 202, 202);
+    --secondaryColor: rgb(158, 158, 158);
+    --tertiaryColor: rgb(117, 117, 117);
+}
+
+.mainArea {
+    width: 30%;
+    height: 100%;
+    background-color: var(--secondaryColor);
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    scrollbar-width: none;
+    scrollbar-color: var(--tertiaryColor) var(--primaryColor);
+}
+
+.mainArea:hover {
+    scrollbar-width: thin;
+    overflow: auto;
+}

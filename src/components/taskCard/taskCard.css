@@ -1,25 +1,39 @@
+:root {
+    --primaryColor: rgb(202, 202, 202);
+    --secondaryColor: rgb(158, 158, 158);
+    --tertiaryColor: rgb(117, 117, 117);
+}
+
 .taskCard {
     height: 300px;
     width: 300px;
-    background-color: rgb(202, 202, 202);
+    background-color: var(--primaryColor);
     color: rgb(70, 70, 70);
-    margin: 1em 1em 1em 1em;
+    margin: 1em auto;
     box-shadow: 5px 5px 20px rgb(34, 34, 34);
     position: relative;
+    display: flex;
+	flex-direction: column;
 }
 
 
-.title {
+/*TITLE*/
+.titleContainer {
+    height: 100%;
     width: 100%;
-    background-color: rgb(158, 158, 158);
+    background-color: var(--tertiaryColor);
+    flex: 1;
+}
+
+.title {
+    width: 90%;
+    background-color: var(--tertiaryColor);
     border: 0px;
-    border-bottom: 2px solid rgb(158, 158, 158);
     outline: none;
     font-size: 2em;
     position: absolute;
     top: 0px;
 }
-
 
 .removeCard {
     font-size: 24px;
@@ -31,4 +45,28 @@
 
 .removeCard:hover {
     cursor: pointer;
+}
+
+
+/*BODY*/
+.body {
+    height: 100%;
+    width: 100%;
+    flex: 6;
+}
+
+
+/*TASKS*/
+.task {
+    list-style: none;
+    padding-left: .5em;
+    display: flex;
+}
+
+.task:hover {
+    background-color: var(--secondaryColor);
+}
+
+.taskDescription {
+    padding-left: .5em;
 }

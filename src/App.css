@@ -6,10 +6,4 @@
 	flex-direction: column;
 	flex: 1;
 	position: relative;
-	overflow-y: scroll;
-	scrollbar-width: 0px;
-}
-
-.wholePage::-webkit-scrollbar {
-	display: none;
 }
