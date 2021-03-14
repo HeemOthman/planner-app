@@ -30,11 +30,13 @@ class TaskCard extends Component {
                         {this.state.tasks.map(task =>
                             <div className="task" key={task.id}>
                                 <input type="checkbox"
+                                       className="checkbox"
                                        id={task.id}
                                        onChange={() => this.handleCheckboxClick(this.state.tasks[task.id])}
                                        checked={task.isComplete}></input>
                                 <li className="taskDescription"
-                                    id={task.id}>{task.value}</li>
+                                    id={task.id}
+                                    style={task.isComplete? {"textDecoration": "line-through"} : {} }>{task.value}</li>
                             </div>
                         )}
                     </ul>
@@ -58,7 +60,7 @@ class TaskCard extends Component {
 
         const updatedTasks = [...this.state.tasks];
         updatedTasks[task.id] = {...task};
-        updatedTasks[task.id].isComplete = true;
+        updatedTasks[task.id].isComplete = !updatedTasks[task.id].isComplete;
 
          this.setState({
             tasks: updatedTasks

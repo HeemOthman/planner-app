@@ -1,19 +1,22 @@
 :root {
-    --primaryColor: rgb(202, 202, 202);
-    --secondaryColor: rgb(158, 158, 158);
-    --tertiaryColor: rgb(117, 117, 117);
+	--primaryColor: #9b9a99;
+	--secondaryColor: #E85A4F;
+	--tertiaryColor: #A7C0CD;
+
+    --backgroundColor: rgb(228, 228, 228);
 }
 
 .taskCard {
     height: 300px;
     width: 300px;
-    background-color: var(--primaryColor);
+    background-color: var(--tertiaryColor);
     color: rgb(70, 70, 70);
-    margin: 1em auto;
+    margin: 1em;
     box-shadow: 5px 5px 20px rgb(34, 34, 34);
     position: relative;
     display: flex;
 	flex-direction: column;
+    border-radius: 20px;
 }
 
 
@@ -21,26 +24,32 @@
 .titleContainer {
     height: 100%;
     width: 100%;
-    background-color: var(--tertiaryColor);
+    background-color: var(--primaryColor);
     flex: 1;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 .title {
     width: 90%;
-    background-color: var(--tertiaryColor);
+    color: var(--secondaryColor);
+    background-color: var(--primaryColor);
     border: 0px;
     outline: none;
     font-size: 2em;
     position: absolute;
     top: 0px;
+    padding-left: 20px;
+    border-radius: 20px;
 }
 
 .removeCard {
     font-size: 24px;
     font-weight: bold;
     position: absolute;
-    top: 0;
-    right: 10px;
+    top: 5px;
+    right: 20px;
+    color: var(--secondaryColor);
 }
 
 .removeCard:hover {
@@ -63,10 +72,14 @@
     display: flex;
 }
 
-.task:hover {
-    background-color: var(--secondaryColor);
+.task:hover > .checkbox {
+    visibility: visible;
 }
 
 .taskDescription {
     padding-left: .5em;
+}
+
+.checkbox {
+    visibility: hidden;
 }

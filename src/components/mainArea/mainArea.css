@@ -1,21 +1,20 @@
 :root {
-    --primaryColor: rgb(202, 202, 202);
-    --secondaryColor: rgb(158, 158, 158);
-    --tertiaryColor: rgb(117, 117, 117);
+	--primaryColor: #9b9a99;
+	--secondaryColor: #c55e57;
+	--tertiaryColor: #e0d7ca;
+
+    --backgroundColor: rgb(228, 228, 228);
 }
 
 .mainArea {
-    width: 30%;
+    width: 100%;
     height: 100%;
-    background-color: var(--secondaryColor);
-    overflow: hidden;
-    position: absolute;
-    right: 0;
-    scrollbar-width: none;
-    scrollbar-color: var(--tertiaryColor) var(--primaryColor);
-}
-
-.mainArea:hover {
-    scrollbar-width: thin;
     overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(90, 90, 90) var(--backgroundColor);
+    display: flex;
+    flex: 3;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
