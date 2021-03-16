@@ -1,12 +1,13 @@
 import './App.css';
-import TaskCard from './components/taskCard/taskCard'
+import UpperArea from './components/upperArea/upperArea';
+import MainArea from './components/mainArea/mainArea'
+
 
 function App() {
 	return (
 		<div className="wholePage">
-			<TaskCard></TaskCard>
-			<TaskCard></TaskCard>
-			<TaskCard></TaskCard>
+			<UpperArea></UpperArea>
+			<MainArea></MainArea>
 		</div>
 	);
 }
