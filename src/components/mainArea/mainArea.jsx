@@ -8,20 +8,7 @@ class MainArea extends Component {
             1,
             2,
             3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13,
-            14,
-            15,
-            16,
-            17
+            4
         ]
      }
 
@@ -39,7 +26,7 @@ class MainArea extends Component {
 
     //HANDLE DELETE
     handleDelete = (id) => {
-        const taskCards = this.state.ids.filter(arrayId => arrayId !== id);
+        const taskCards = this.state.ids.filter(taskCardId => taskCardId !== id);
         this.setState({ids: taskCards});
     }
 

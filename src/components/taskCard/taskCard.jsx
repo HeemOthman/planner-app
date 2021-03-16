@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
+import TaskObject from '../taskObject/taskObject';
 import './taskCard.css'
 
 class TaskCard extends Component {
     state = { 
         title: "Title",
         id: this.props.id,
-        tasks: [
-            {id: 0, value:"myTask", isComplete: false},
-            {id: 1, value:"To do", isComplete: false}
-        ]
+        completedTasks: 0,
+        tasks: []
     }
 
 
@@ -19,7 +18,7 @@ class TaskCard extends Component {
                     <input id="title"
                         className="title"
                         defaultValue={this.state.title}
-                        onChange={this.handleChange}>
+                        onChange={this.handleChangeTitleText}>
                     </input>
 
                     <span className="gg-add-r" onClick={this.handleAddTask}></span>
@@ -28,26 +27,23 @@ class TaskCard extends Component {
                 
                 <div className="body">
                     <ul>
-                        {this.state.tasks.map(task =>
-                            <div className="taskList" key={task.id}>
-                                <input type="checkbox"
-                                       className="checkbox"
-                                       id={task.id}
-                                       onChange={() => this.handleCheckboxClick(task)}
-                                       checked={task.isComplete}>
-                                </input>
-                                <li>
-                                    <input className="taskDescription"
-                                           id={task.id}
-                                           style={task.isComplete? {"textDecoration": "line-through"} : {} }
-                                           defaultValue={task.value}
-                                           onChange={(event) => this.handleChangeTask(event, task)}>
-                                    </input>
-                                </li>
-                                <span className="gg-trash" onClick={() => this.handleRemoveTask(task)}></span>
-                            </div>
+                        {this.state.tasks.map((task) =>
+                            <TaskObject key={task.id}
+                                        id={task.id}
+                                        isComplete={task.isComplete}
+                                        value={task.value}
+                                        onCheckboxClick={(taskId) => this.handleCheckboxClick(taskId)}
+                                        onChangeTaskText={(event, taskId) => this.handleChangeTaskText(event, taskId)}
+                                        onRemoveTask={(taskId) => this.handleRemoveTask(taskId)}>
+                            </TaskObject>
                         )}
                     </ul>
+                </div>
+
+                <div className="footer">
+                    <div className="completedCount">
+                        {this.state.completedTasks}/{this.state.tasks.length}
+                    </div>
                 </div>
             </div>
         );
@@ -55,61 +51,89 @@ class TaskCard extends Component {
 
 
     //HANDLE CHANGING TITLE TEXT
-    handleChange = (newInput) => {
-        this.setState({
-            title: newInput.target.value
-        })
+    handleChangeTitleText = (newTitle) => {
+        this.setState({ title: newTitle.target.value })
     }
 
 
-    //HANDLE CHANGING TITLE TEXT
-    handleChangeTask = (event, task) => {
-        const updatedTasks = [...this.state.tasks];
+    //HANDLE CHANGING TASK TEXT
+    handleChangeTaskText = (event, taskId) => {
+        let updatedTasks = [...this.state.tasks];
+        let task = this.getTaskById(taskId);
         let index = updatedTasks.indexOf(task);
+
         updatedTasks[index].value = event.target.value;
 
-        this.setState({
-            tasks: updatedTasks
-        })
+        this.setState({ tasks: updatedTasks })
     }
 
-
-//TODO: If adding, then deleting, then adding tasks back,
-//will get an error about encountering children with the same id.
-//Need to update the id's of each item based on their current index
 
     //HANDLE ADDING A TASK
     handleAddTask = () => {
-        this.setState({
-            tasks: [...this.state.tasks, {id: this.state.tasks.length, value: "New Task", isComplete: false}]
-        });
+        let updatedTasks = [...this.state.tasks];
+        updatedTasks.push({id: this.state.tasks.length, value: "New Task", isComplete: false});
+
+        for (let i=0; i<updatedTasks.length; i++) {
+            updatedTasks[i].id = i;
+        }
+
+        this.setState({ tasks: updatedTasks });
     }
 
 
     //HANDLE REMOVING A TASK
-    handleRemoveTask = (task) => {
-        const updatedTasks = [...this.state.tasks];
-        let index = updatedTasks.indexOf(task);
-
-        updatedTasks.splice(index, 1);
-
-        this.setState({
-            tasks: updatedTasks
+    handleRemoveTask = (taskId) => {
+        let updatedTaskss = [...this.state.tasks];
+        let updatedTasks = updatedTaskss.filter(task => task.id !== taskId);
+        
+        this.setState({ tasks: updatedTasks }, () => {
+            this.updateCompletedTasksCount();
         });
     }
 
 
     //HANDLE CLICKING THE CHECKBOX
-    handleCheckboxClick = (task) => {
-        const updatedTasks = [...this.state.tasks];
-        let index = updatedTasks.indexOf(task);
+    handleCheckboxClick = (taskId) => {
+        let updatedTasks = [...this.state.tasks];
+        let taskToComplete = this.getTaskById(taskId);
+        let index = updatedTasks.indexOf(taskToComplete);
 
         updatedTasks[index].isComplete = !updatedTasks[index].isComplete;
 
-        this.setState({
-            tasks: updatedTasks
+        this.setState({ tasks: updatedTasks }, () => {
+            this.updateCompletedTasksCount();
         });
     }
+
+
+    //UPDATE THE COUNT OF COMPLETED TASKS
+    updateCompletedTasksCount = () => {
+        let total = 0;
+
+        this.state.tasks.forEach((task) => {    
+            if (task.isComplete) {
+                total++;
+            }
+            
+        });
+
+        this.setState({ completedTasks: total })
+    }
+
+
+    //GET THE TASK BASED ON AN ID
+    getTaskById = (id) => {
+        let taskToGet = [];
+
+        this.state.tasks.forEach((task) => {
+            if (task.id === id) {
+                taskToGet = task;
+            }
+        });
+
+        return taskToGet;
+    }
+
 
 }
  

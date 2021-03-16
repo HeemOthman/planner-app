@@ -45,7 +45,6 @@
     border-radius: 20px;
 }
 
-
 /*ADD BUTTON*/
 /*#region*/
 .gg-add-r {
@@ -81,6 +80,10 @@
  }
 /*#endregion*/
 
+.gg-add-r:hover {
+    cursor: pointer;
+    background-color: rgb(121, 163, 121);
+}
 
 /*CLOSE BUTTON*/
 /*#region*/
@@ -115,16 +118,11 @@
 }
 /*#endregion*/
 
-
-.gg-add-r:hover {
-    cursor: pointer;
-    background-color: rgb(121, 163, 121);
-}
-
 .gg-close-r:hover {
     cursor: pointer;
     background-color: rgb(189, 141, 137);
 }
+
 
 /************************************************/
 /* BODY *****************************************/
@@ -134,86 +132,16 @@
     width: 100%;
     overflow-y: scroll;
     scrollbar-width: none;
-    flex: 6;
+    flex: 5;
 }
 
-
-.taskList {
-    list-style: none;
-    padding-left: .5em;
+.footer {
+    flex: 1;
     position: relative;
-    display: flex;
 }
 
-
-/*TRASH ICON*/
-/*#region*/
-.gg-trash {
-    width: 10px;
-    height: 12px;
-    border: 2px solid transparent;
-    border-bottom-left-radius: 1px;
-    border-bottom-right-radius: 1px;
-    box-shadow:
-        0 0 0 2px,
-        inset -2px 0 0,
-        inset 2px 0 0;
-    box-sizing: border-box;
-    color: var(--secondaryColor);
-    display: block;
-    margin-top: 4px;
-    transform: scale(var(--ggs,1));
+.completedCount {
     position: absolute;
-    top: 1px;
-    right: 5px;
-    visibility: hidden;
-}
-.gg-trash::after, .gg-trash::before {
-    content: "";
-    display: block;
-    box-sizing: border-box;
-    position: absolute
-}
-.gg-trash::after {
-    background: currentColor;
-    border-radius: 3px;
-    width: 16px;
-    height: 2px;
-    top: -4px;
-    left: -5px
-}
-.gg-trash::before {
-    width: 10px;
-    height: 4px;
-    border: 2px solid;
-    border-bottom: transparent;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-    top: -7px;
-    left: -2px
-}
-/*#endregion*/
-
-
-.gg-trash:hover {
-    cursor: pointer;
-    background-color: rgb(189, 141, 137);
-}
-
-
-.taskList:hover > .checkbox, .taskList:hover > .gg-trash {
-    visibility: visible;
-}
-
-
-.taskDescription {
-    background-color: var(--tertiaryColor);
-    border: 0px;
-    outline: none;
-    padding-left: .5em;
-}
-
-
-.checkbox {
-    visibility: hidden;
+    bottom: 5px;
+    right: 15px;
 }
