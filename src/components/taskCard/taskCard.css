@@ -157,6 +157,10 @@
     flex: 5;
 }
 
+.body::-webkit-scrollbar {
+    display: none;
+}
+
 .footer {
     flex: 1;
     position: relative;
