@@ -12,8 +12,8 @@ class TaskCard extends Component {
 
 
     render() { 
-        return ( 
-            <div className="taskCard">
+        return (
+            <div className={this.props.taskCardClass}>
                 <div className="titleContainer">
                     <input id="title"
                         className="title"
@@ -79,7 +79,33 @@ class TaskCard extends Component {
         
         updatedTasks.push({id: newId, value: "New Task", isComplete: false});
 
-        this.setState({ tasks: updatedTasks });
+        this.setState({ tasks: updatedTasks }, () => {
+            let data = JSON.parse(localStorage.getItem("taskCardsInfo"));
+
+            if (localStorage.getItem("taskCardsInfo")) {
+                let hasUpdated = false;
+
+                for (let i=0; i<data.length; i++) {
+                    if (data[i].id === this.state.id) {
+                        data[i] = this.state;
+                        hasUpdated = true;
+                    }
+                }
+
+                if (!hasUpdated) {
+                    data.push(this.state);
+                }
+
+                localStorage.taskCardsInfo = JSON.stringify(data);
+            }
+            else {
+                let arr = [this.state];
+                localStorage.setItem("taskCardsInfo", JSON.stringify(arr));
+            }
+            
+        });
+
+        
     }
 
 
@@ -136,6 +162,32 @@ class TaskCard extends Component {
         return taskToGet;
     }
 
+
+    //UPDATE THE LOCAL STORAGE
+    updateLocalStorage() {
+        let data = JSON.parse(localStorage.getItem("taskCardsInfo"));
+
+        if (localStorage.getItem("taskCardsInfo")) {
+            let hasUpdated = false;
+
+            for (let i=0; i<data.length; i++) {
+                if (data[i].id === this.state.id) {
+                    data[i] = this.state;
+                    hasUpdated = true;
+                }
+            }
+
+            if (!hasUpdated) {
+                data.push(this.state);
+            }
+
+            localStorage.taskCardsInfo = JSON.stringify(data);
+        }
+        else {
+            let arr = [this.state];
+            localStorage.setItem("taskCardsInfo", JSON.stringify(arr));
+        }
+    }
 
 }
  

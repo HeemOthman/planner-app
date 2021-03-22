@@ -6,6 +6,28 @@
     --backgroundColor: rgb(228, 228, 228);
 }
 
+
+@keyframes slideIn {
+    0% {margin-left: 500em;}
+    100% {margin-left: 1em;}
+}
+
+.slideIn {
+    animation-name: slideIn;
+    animation-duration: .5s;
+}
+
+@keyframes slideOut {
+    0% {margin-left: 1em;}
+    100% {margin-left: 500em;}
+}
+
+.slideOut {
+    animation-name: slideOut;
+    animation-duration: .5s;
+}
+
+
 .taskCard {
     height: 300px;
     width: 300px;
