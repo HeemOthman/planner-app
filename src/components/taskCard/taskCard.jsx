@@ -4,7 +4,7 @@ import './taskCard.css'
 
 class TaskCard extends Component {
     state = { 
-        title: "Title",
+        title: this.props.title,
         id: this.props.id,
         completedTasks: 0,
         tasks: []
@@ -17,7 +17,7 @@ class TaskCard extends Component {
                 <div className="titleContainer">
                     <input id="title"
                         className="title"
-                        defaultValue={this.state.title}
+                        defaultValue={this.state.title === "Enter a title"? "New Task" : this.state.title}
                         onChange={this.handleChangeTitleText}>
                     </input>
 
@@ -71,11 +71,13 @@ class TaskCard extends Component {
     //HANDLE ADDING A TASK
     handleAddTask = () => {
         let updatedTasks = [...this.state.tasks];
-        updatedTasks.push({id: this.state.tasks.length, value: "New Task", isComplete: false});
+        let newId = 0;
 
-        for (let i=0; i<updatedTasks.length; i++) {
-            updatedTasks[i].id = i;
+        if (updatedTasks.length > 0) {
+            newId = updatedTasks[updatedTasks.length-1].id + 1;
         }
+        
+        updatedTasks.push({id: newId, value: "New Task", isComplete: false});
 
         this.setState({ tasks: updatedTasks });
     }
