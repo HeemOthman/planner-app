@@ -149,7 +149,7 @@ class MainArea extends Component {
             }
         });
 
-        this.setState({ taskCards: taskCards })
+        this.setState({ taskCards: taskCards }, () => this.updateLocalStorage());
     }
 
 
@@ -176,7 +176,7 @@ class MainArea extends Component {
         card.tasks = updatedTasks;
 
         //SET THE STATE
-        this.setState({ taskCards: taskCards });
+        this.setState({ taskCards: taskCards }, () => this.updateLocalStorage());
     }
 
 
@@ -204,9 +204,7 @@ class MainArea extends Component {
         updatedTasks.push({id: newId, value: "New Task", isComplete: false});
 
         //SET THE STATE
-        this.setState({ taskCards: taskCards }, () => {
-
-        });
+        this.setState({ taskCards: taskCards }, () => this.updateLocalStorage());
     }
 
 
@@ -233,6 +231,7 @@ class MainArea extends Component {
         //SET THE STATE
         this.setState({ taskCards: taskCards }, () => {
             this.updateCompletedTasksCount(cardId);
+            this.updateLocalStorage();
         });
     }
 
@@ -264,6 +263,7 @@ class MainArea extends Component {
         //SET THE STATE
         this.setState({ taskCards: taskCards }, () => {
             this.updateCompletedTasksCount(cardId);
+            this.updateLocalStorage();
         });
     }
 
@@ -324,27 +324,11 @@ class MainArea extends Component {
 
     //UPDATE THE LOCAL STORAGE
     updateLocalStorage() {
-        let data = JSON.parse(localStorage.getItem("taskCardsInfo"));
-
-        if (localStorage.getItem("taskCardsInfo")) {
-            let hasUpdated = false;
-
-            for (let i=0; i<data.length; i++) {
-                if (data[i].id === this.state.id) {
-                    data[i] = this.state;
-                    hasUpdated = true;
-                }
-            }
-
-            if (!hasUpdated) {
-                data.push(this.state);
-            }
-
-            localStorage.taskCardsInfo = JSON.stringify(data);
+        if (!localStorage.taskCards) {
+            localStorage.setItem("taskCards", JSON.stringify(this.state.taskCards));
         }
         else {
-            let arr = [this.state];
-            localStorage.setItem("taskCardsInfo", JSON.stringify(arr));
+            localStorage.taskCards = JSON.stringify(this.state.taskCards);
         }
     }
 
