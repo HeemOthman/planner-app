@@ -86,16 +86,8 @@ class MainArea extends Component {
                         taskCardClass: "taskCard"
         });
 
-        //SET THE STATE
-        this.setState({taskCards: taskCards});
-
-        //STORE THE CARDS IN LOCAL STORAGE
-        if (!localStorage.taskCards) {
-            localStorage.setItem("taskCards", JSON.stringify(taskCards));
-        }
-        else {
-            localStorage.taskCards = JSON.stringify(taskCards);
-        }
+        //SET THE STATE AND UPDATE LOCAL STORAGE
+        this.setState({taskCards: taskCards}, () => this.updateLocalStorage());
     };
 
 
@@ -120,16 +112,8 @@ class MainArea extends Component {
         //FILTER OUT THE CARD TO BE DELETED
         taskCards = this.state.taskCards.filter(taskCard => taskCard.id !== id);
 
-        //SET THE STATE
-        this.setState({taskCards: taskCards}, () => {
-            //SET THE LOCAL STORAGE
-            if (!localStorage.taskCards) {
-                localStorage.setItem("taskCards", JSON.stringify(taskCards));
-            }
-            else {
-                localStorage.taskCards = JSON.stringify(taskCards);
-            }
-        });
+        //SET THE STATE AND UPDATE LOCAL STORAGE
+        this.setState({taskCards: taskCards}, () => this.updateLocalStorage());
     };
 
 
@@ -175,7 +159,7 @@ class MainArea extends Component {
         //UPDATE THE CARD'S TASKS SO IT HAS THE NEW TEXT
         card.tasks = updatedTasks;
 
-        //SET THE STATE
+        //SET THE STATE AND UPDATE LOCAL STORAGE
         this.setState({ taskCards: taskCards }, () => this.updateLocalStorage());
     }
 
@@ -203,7 +187,7 @@ class MainArea extends Component {
         //PUSH THE NEW TASK INTO THE LIST OF TASKS
         updatedTasks.push({id: newId, value: "New Task", isComplete: false});
 
-        //SET THE STATE
+        //SET THE STATE AND UPDATE LOCAL STORAGE
         this.setState({ taskCards: taskCards }, () => this.updateLocalStorage());
     }
 
@@ -228,7 +212,7 @@ class MainArea extends Component {
         //SET THE CARD'S TASKS TO THE NEW FILTERED ARRAY
         card.tasks = updatedTasksFiltered;
 
-        //SET THE STATE
+        //SET THE STATE AND UPDATE LOCAL STORAGE
         this.setState({ taskCards: taskCards }, () => {
             this.updateCompletedTasksCount(cardId);
             this.updateLocalStorage();
@@ -260,7 +244,7 @@ class MainArea extends Component {
         //UPDATE THE TASKS WITH THE NEW VALUE
         card.tasks = updatedTasks;
 
-        //SET THE STATE
+        //SET THE STATE AND UPDATE LOCAL STORAGE
         this.setState({ taskCards: taskCards }, () => {
             this.updateCompletedTasksCount(cardId);
             this.updateLocalStorage();
